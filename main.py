@@ -58,7 +58,16 @@ async def on_message(ctx):
 async def on_ready():
     mass_dm = input("Enter Message To Mass Dm: ")
 
-    otherdm = input("Enter What To Send In All Channels In All Servers Its In: ")
+    while True:
+        yure = input("Want To Send An Message In Every Possible Channel (y/n, May Take Alot Of Time): ")
+
+        if yure == "y":
+            otherdm = input("Enter What To Send In All Channels In All Servers Its In: ")
+            break
+        if yure == "n":
+            break
+        if yure != "y" and yure != "n":
+            print("Enter A Valid Choice")
 
     while True:
         try:
@@ -98,15 +107,15 @@ async def on_ready():
 
 
 
-
-    for guild in bot.guilds:
-        for channel in guild.channels:
-            try:
-                await channel.send(otherdm)
-                print(colorama.Fore.GREEN + f"[+] Sent Message In Server, Server Id: {str(guild.id)}, Channel Id: {str(channel.id)}")
-            except:
-                pass
-    print(colorama.Fore.GREEN + "[+] Done Sending Messaage In Every Channel Possible")
+    if yure == "y":
+        for guild in bot.guilds:
+            for channel in guild.channels:
+                try:
+                    await channel.send(otherdm)
+                    print(colorama.Fore.GREEN + f"[+] Sent Message In Server, Server Id: {str(guild.id)}, Channel Id: {str(channel.id)}")
+                except:
+                    pass
+        print(colorama.Fore.GREEN + "[+] Done Sending Messaage In Every Channel Possible")
 
 
 
