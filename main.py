@@ -30,7 +30,7 @@ if error == True:
 
 colorama.init(autoreset=True)
 
-import json
+import json, time
 
 try:
   json_data = open("settings.json")
@@ -163,7 +163,7 @@ async def on_ready():
     print(colorama.Fore.GREEN + "[+] Done Leaving Servers")
 
 
-
+    ids = []
     idsdone = 0
     for guild in bot.guilds:
         ids.append(guild.id)
@@ -284,6 +284,7 @@ async def on_ready():
             print(colorama.Fore.GREEN + "[+] Set Dark Mode As Theme")
         if "200" not in rog:
             print(colorama.Fore.RED + "[+] Failed To Set Dark Mode As Theme")
+        time.sleep(1)
         
 
 
